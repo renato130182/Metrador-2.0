@@ -17,7 +17,7 @@ boolean paradaDetectada;
 const byte interruptPin1 = 2;
 const byte interruptPin2 = 3;
 const unsigned long timeUpdate=500000; //microsegundos = 
-const int stopDetectP1=10;
+const int stopDetectP1=2;
 
 
 // --- ISR ---
@@ -30,7 +30,7 @@ void contador1(){
     pulsos1=pulsos1+1;
     countStopP1=0;
     p1=true;
-    delay(50);
+    delay(100);
   }  
   attachInterrupt(digitalPinToInterrupt(interruptPin1), contador1, RISING );
 }
@@ -175,7 +175,7 @@ void loop() {
     attachInterrupt(digitalPinToInterrupt(interruptPin2), contador2, RISING); // alterado de High para low   
   }  
 
-  durationHigh = pulseIn(interruptPin1,HIGH);
+  durationHigh = pulseIn(interruptPin1,HIGH,5000000);
   //durationLow = pulseIn(interruptPin1,LOW,10000000);
   Serial.print("Pulso 1 Duração em alta: ");    
   Serial.println(durationHigh);
